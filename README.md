@@ -125,11 +125,12 @@ catkin_install_python(PROGRAMS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 ```
-If you are using a USB camera, add the port name on
+If you are using a USB camera then add the port name as shown below:
+(before make sure that your camera port same as below)
 ```sh
 videoCaptureObject = cv2.VideoCapture('/dev/video2')
 ```
-or if it's the default camera, use
+or if it is a default camera then edit code like this :
 ```sh
 videoCaptureObject = cv2.VideoCapture(0).
 ```
