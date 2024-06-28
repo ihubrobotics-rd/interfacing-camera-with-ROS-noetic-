@@ -1,0 +1,22 @@
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro $(find master_description)/urdf/master.xacro"/>
+
+  <!-- Localization (AMCL) -->
+  <include file="$(find master_description)/launch/amcl.launch" />
+
+  <!-- Move Base -->
+  <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+    <rosparam file="$(find master_description)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find master_description)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find master_description)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find master_description)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find master_description)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find master_description)/config/slave_bot_map.yaml" command="load"/>
+  </node>
+
+  <!-- RViz for visualization -->
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find master_description)/rviz/master.rviz" required="true"/>
+ 
+
+</launch>
+

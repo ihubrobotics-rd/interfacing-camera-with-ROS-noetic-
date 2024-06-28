@@ -1,0 +1,21 @@
+<launch>
+  <!-- Load the map -->
+  <arg name="map_file" default="$(find master_description)/map/master_map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!-- Launch AMCL -->
+  <node name="amcl" pkg="amcl" type="amcl" output="screen">
+    <param name="use_map_topic" value="true"/>
+    <param name="base_frame_id" value="base_link"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="global_frame_id" value="map"/>
+    <param name="tf_broadcast" value="false"/> <!-- Disable broadcasting redundant TF data -->
+  </node>
+  
+  <!-- Load Costmap Parameters -->
+  <rosparam file="$(find master_description)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+  <rosparam file="$(find master_description)/config/local_costmap_params.yaml" command="load" ns="local_costmap" />
+  <rosparam file="$(find master_description)/config/global_costmap_params.yaml" command="load" ns="global_costmap" />
+  <rosparam file="$(find master_description)/config/base_local_planner_params.yaml" command="load" />
+</launch>
+
