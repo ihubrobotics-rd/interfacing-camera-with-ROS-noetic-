@@ -100,11 +100,11 @@ roscore
 ```
 Run the Publisher Node:
 ```sh
-rosrun your_package_name camera_publisher.py
+rosrun your_package_name your_publisher_node.py
 ```
 Run the Subscriber Nodes:
 ```sh
-rosrun your_package_name face_detection_subscriber.py
+rosrun your_package_name your_subscriber_node.py
 ```
 ## *note*
 Don't forget to add the path in CMakeLists.txt:
